@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TokenService {
 
+  public static final String KEY_ID = "kid";
+
   public String createToken(TokenRequest request) throws IOException {
 
     KeyPair keyPair = JksExtractor.execute(request.getPassword(), request.getKeyAlias(),
@@ -24,6 +26,7 @@ public class TokenService {
         (RSAPrivateKey) keyPair.getPrivate());
 
     return JWT.create()
+        .withHeader(Collections.singletonMap(KEY_ID, request.getKeyId()))
         .withSubject(request.getClientId())
         .withIssuer(request.getClientId())
         .withJWTId(UUID.randomUUID().toString())

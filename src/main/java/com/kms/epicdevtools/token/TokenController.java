@@ -34,6 +34,7 @@ public class TokenController {
     String line = Stream.generate(() -> "-").limit(20).collect(Collectors.joining());
     log.info("{} BEGIN-REQUEST {}", line, line);
     log.info("Client Id: {}", request.getClientId());
+    log.info("Key Id: {}", request.getKeyId());
     log.info("OauthUrl: {}", request.getOauthUrl());
     log.info("Password: {}", request.getPassword());
     log.info("Key Alias: {}", request.getKeyAlias());
