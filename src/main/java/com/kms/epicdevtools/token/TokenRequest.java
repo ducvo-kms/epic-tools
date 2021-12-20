@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class TokenRequest {
+  String keyId;
   String clientId;
   String oauthUrl;
   String password;

@@ -16,8 +16,72 @@
   <description>Auto generation Epic Token With JWS File</description>
   <properties>
     <java.version>1.8</java.version>
+    <hapi.version>5.6.1</hapi.version>
+    <spring.cloud-version>2021.0.0</spring.cloud-version>
   </properties>
   <dependencies>
+    <!-- This dependency includes the core HAPI-FHIR classes -->
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>hapi-fhir-client-okhttp</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>hapi-fhir-base</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+    <!-- Include the client -->
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>hapi-fhir-client</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+    <!-- At least one "structures" JAR must also be included -->
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>hapi-fhir-structures-r4</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+
+    <!-- This dependency is used to convert from earlier versions of the FHIR structures to a later version -->
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>hapi-fhir-converter</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+
+    <!-- Support DSTU2-->
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>hapi-fhir-structures-dstu2</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>hapi-fhir-structures-hl7org-dstu2</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>org.hl7.fhir.dstu2</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+    <!-- Support DSTU2-->
+
+    <!-- Support DSTU3 -->
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>org.hl7.fhir.dstu3</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ca.uhn.hapi.fhir</groupId>
+      <artifactId>hapi-fhir-structures-dstu3</artifactId>
+      <version>${hapi.version}</version>
+    </dependency>
+    <!-- Support DSTU3 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -31,6 +95,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jetty</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
     <dependency>
       <groupId>com.auth0</groupId>
@@ -48,7 +116,17 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring.cloud-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <build>
     <plugins>
       <plugin>
